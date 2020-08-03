@@ -1,0 +1,35 @@
+<!DOCTYPE html><html lang="en"><head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+
+	<title>Stealth Client - MessengersBots</title>
+
+	<meta name="theme-color" content="#E938C2">
+	<link rel="apple-touch-icon" href="images/touch-icons/logo-192.png">
+
+	<link rel="manifest" href="/manifest.json">
+	<link rel="icon" type="image/png" href="/favicon.png">
+	
+	<link rel="stylesheet" href="/build/bundle.css">
+
+	<script type="module" defer="" src="/build/main.js"></script>
+<meta data-render="prerendered"><meta name="description" content="Ultimate Ultima Online scripting client" data-origin="routify"><meta property="og:description" content="Ultimate Ultima Online scripting client" data-origin="routify"><meta name="title" content="Stealth Client - MessengersBots" data-origin="routify"><meta property="og:title" content="Stealth Client - MessengersBots" data-origin="routify"></head>
+
+<body>
+	<noscript>Please enable Javascript for best experience.</noscript>
+
+
+<div id="routify-app"><div class="container svelte-1r0ewnc"><nav class="header svelte-28ka2x"><a href="/" class="svelte-28ka2x">home</a><a href="/api" class="svelte-28ka2x">api</a><a href="/manuals" class="svelte-28ka2x active">manuals</a><a href="/about" class="svelte-28ka2x">about</a></nav> <h1 id="messengers-bots-registration">Messengers Bots Registration</h1> <p>Stealth connects not to the messengers, but to their bots, and using its for sending/receiving messages. Below shown process of bot registration in different messengers.</p> <p>After registration, you will receive Token from the bot, which will be used in the stealth to be connected to the bot.</p> <p>P.S. Token shown only as examples;</p> <h3 id="telegram">Telegram</h3> <p>Just talk to user BotFather ( <a href="https://telegram.me/botfather" rel="nofollow">https://telegram.me/botfather</a> )</p> <p>/newbot</p> <p>Answer should be like “Alright, a new bot. How are we going to call it? Please choose a name for your bot.”</p> <p>Write a name of your bot, f.e. VizBot</p> <p>In few seconds you will receive answer “Good. Now let’s choose a username for your bot. It must end in <code>bot</code>. Like this, for example: TetrisBot or tetris_bot.”</p> <p>Write an unique id with “bot” at the end.</p> <p>If selected id already exists, you will receive an answer “Sorry, this username is already taken. Please try something different.” until id is unique.</p> <p>F.E.  Viz402020_Bot</p> <p>In answer you will receive few strings like “Done! Congratulations on your new bot. You will find it at t.me/Viz402020_Bot. …” You are interested in line “Use this token to access the HTTP API: 528570440:AAFLNlgz191XQ-dzFco0EqSUaAkpgMbcqyo”. That is token, which you must set before connect Telegram in Stealth.</p> <h3 id="viber">Viber</h3> <p>Registration process going on in browser, not in Viber!</p> <p>if you haven’t registered at partners.viber.com yet - start from
+Если вы еще не регистрировались на partners.viber.com - то начать надо с <a href="https://partners.viber.com/register/send" rel="nofollow">https://partners.viber.com/register/send</a> , in registration use pnone number with Viber(activation code will be sent to Viber), Next, write received code, write password, finish.</p> <p>Authorize at <a href="https://partners.viber.com." rel="nofollow">https://partners.viber.com.</a></p> <p>On left menu select “Create Bot Account”.</p> <p>Must be filled only fields with stars (*)</p> <p>Example</p> <ul><li>Account Name  - VizBot</li> 
+<li>URI - vizbot</li> 
+<li>Category - Groups</li> 
+<li>Subcategory - Knowledge
+(two last - any, bot will be published never)</li> 
+<li>Description- any string</li> 
+<li>Language - any</li> 
+<li>Location - any</li> 
+<li>Email Address - any, no verification letter sending.</li> 
+<li>Account Image - bot avatar.</li></ul> <p>Checkbox “The account contains adult content” - must stay unchecked, “I accept the Terms and Conditions” - check.</p> <p>Next press “Create”</p> <p>If you have errors in filling - they will be shown.</p> <p>After correct filling new page shown with text like</p> <p>Account created!
+This is your private token. Use this token to connect to the Viber Chat API.
+477b54fa22e7d33f-742f555081917396-452754352e4becd4</p> <p>That is token, which you must set before connect Viber in Stealth.</p> <h3 id="discord">Discord</h3> <p>Registration process going on in browser, not in Discord !</p> <p>Authorize at <a href="https://discordapp.com/developers/applications" rel="nofollow">https://discordapp.com/developers/applications</a>.</p> <p>Next press button at right side of screen “New Application”, in new dialog write app name (its not a bot name!), and press Create.</p> <p>In left list (menu) press on “Bot”. If warning raised about bot publication, just press “Yes, do it”.</p> <p>In new dialog write Bots name (UserName),and thats all, bot created. To copy its token - press on button “Copy” below “Token” line.</p> <p>To start talking with bot, you should create a server first. In Discord (not in browser) press on plus in round on left menu, than “Create a server”.</p> <p>When new server is created, you shuld join bot to this server. Proceed to info of application, which you are created before, and press button “Copy’ under the CLIENT ID.</p> <p>Next, in browser insert this url:</p> <p><a href="https://discordapp.com/oauth2/authorize?&amp;client_id=CLIENTID&amp;scope=bot&amp;permissions=68608" rel="nofollow">https://discordapp.com/oauth2/authorize?&amp;client_id=CLIENTID&amp;scope=bot&amp;permissions=68608</a></p> <p>CLIENTID mst be replaced with your CLIENT ID!</p> <p>After this, new window will open, select your new server for joining and press OK. Now you can “talk” with your bot on public channel of this server, or in private channel.</p>    </div>   <div id="__routify_iframes" style="display: none;"></div></div></body></html>
+<!--prerendered-->

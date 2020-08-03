@@ -1,0 +1,51 @@
+<!DOCTYPE html><html lang="en"><head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+
+	<title>Stealth Client - irc</title>
+
+	<meta name="theme-color" content="#E938C2">
+	<link rel="apple-touch-icon" href="images/touch-icons/logo-192.png">
+
+	<link rel="manifest" href="/manifest.json">
+	<link rel="icon" type="image/png" href="/favicon.png">
+	
+	<link rel="stylesheet" href="/build/bundle.css">
+
+	<script type="module" defer="" src="/build/main.js"></script>
+<meta data-render="prerendered"><meta name="description" content="Ultimate Ultima Online scripting client" data-origin="routify"><meta property="og:description" content="Ultimate Ultima Online scripting client" data-origin="routify"><meta name="title" content="Stealth Client - irc" data-origin="routify"><meta property="og:title" content="Stealth Client - irc" data-origin="routify"></head>
+
+<body>
+	<noscript>Please enable Javascript for best experience.</noscript>
+
+
+<div id="routify-app"><div class="container svelte-1r0ewnc"><nav class="header svelte-28ka2x"><a href="/" class="svelte-28ka2x">home</a><a href="/api" class="svelte-28ka2x">api</a><a href="/manuals" class="svelte-28ka2x active">manuals</a><a href="/about" class="svelte-28ka2x">about</a></nav> <h1 id="work-with-irc">Work with IRC</h1> <p>In Stealth 7.2.0 added IRC protocol support.</p> <p>Abilities:</p> <ul><li>Private message sending</li> 
+<li>Channel joining (included channel with password), send messages to channel.</li> 
+<li>Receiving messages from channel\from private messages.</li> 
+<li>“Raw” text sending - you can use any irc protocol commands.</li></ul> <p>Nick must be set before start connect to server, otherwise some server can drop your connection!</p> <p>IRC Event - IrcMsgHandler, one param - String.</p> <p>Script example:</p> <pre class="language-pascal">
+<code class="language-pascal">  <span class="token keyword">program</span> test<span class="token punctuation">;</span>
+
+  <span class="token keyword">procedure</span> IrcMsgHandler<span class="token punctuation">(</span>Msg <span class="token punctuation">:</span> <span class="token keyword">String</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">begin</span>
+    AddToJournal<span class="token punctuation">(</span><span class="token string">'IrcMsg: "'</span> <span class="token operator">+</span> Msg <span class="token operator">+</span> <span class="token string">'"'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">end</span><span class="token punctuation">;</span> 
+
+  <span class="token keyword">begin</span> 
+  <span class="token keyword">if</span> <span class="token operator">not</span> IRCConnected <span class="token keyword">then</span>
+    <span class="token keyword">begin</span>        
+      IRCSetNickName<span class="token punctuation">(</span><span class="token string">'Vizzz'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      IRCConnect<span class="token punctuation">(</span><span class="token string">'irc.quakenet.org'</span><span class="token punctuation">,</span><span class="token number">6667</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token keyword">while</span> <span class="token operator">not</span> IRCConnected <span class="token keyword">do</span>
+        wait<span class="token punctuation">(</span><span class="token number">300</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">end</span><span class="token punctuation">;</span>   
+    <span class="token keyword">if</span> IRCConnected <span class="token keyword">then</span>
+      IRCSay<span class="token punctuation">(</span><span class="token string">'some1'</span><span class="token punctuation">,</span> <span class="token string">'New test from Vizzzz'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> IRCConnected <span class="token keyword">then</span>
+      IRCJoin<span class="token punctuation">(</span><span class="token string">'#uos'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> IRCConnected <span class="token keyword">then</span>
+      IRCSay<span class="token punctuation">(</span><span class="token string">'#uos'</span><span class="token punctuation">,</span> <span class="token string">'CH test from Vizzzz'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    
+
+    <span class="token keyword">while</span> <span class="token keyword">True</span> <span class="token keyword">do</span> 
+      Wait<span class="token punctuation">(</span><span class="token number">500</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">end</span><span class="token punctuation">.</span></code></pre>    </div>   <div id="__routify_iframes" style="display: none;"></div></div></body></html>
+<!--prerendered-->

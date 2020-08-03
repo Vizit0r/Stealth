@@ -1,0 +1,57 @@
+<!DOCTYPE html><html lang="en"><head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+
+	<title>Stealth Client - AddFigure</title>
+
+	<meta name="theme-color" content="#E938C2">
+	<link rel="apple-touch-icon" href="images/touch-icons/logo-192.png">
+
+	<link rel="manifest" href="/manifest.json">
+	<link rel="icon" type="image/png" href="/favicon.png">
+	
+	<link rel="stylesheet" href="/build/bundle.css">
+
+	<script type="module" defer="" src="/build/main.js"></script>
+<meta data-render="prerendered"><meta name="description" content="Ultimate Ultima Online scripting client" data-origin="routify"><meta property="og:description" content="Ultimate Ultima Online scripting client" data-origin="routify"><meta name="title" content="Stealth Client - AddFigure" data-origin="routify"><meta property="og:title" content="Stealth Client - AddFigure" data-origin="routify"></head>
+
+<body>
+	<noscript>Please enable Javascript for best experience.</noscript>
+
+
+<div id="routify-app"><div class="container svelte-1r0ewnc"><nav class="header svelte-28ka2x"><a href="/" class="svelte-28ka2x">home</a><a href="/api" class="svelte-28ka2x active">api</a><a href="/manuals" class="svelte-28ka2x">manuals</a><a href="/about" class="svelte-28ka2x">about</a></nav> <h1 id="title">AddFigure</h1> <p>Addd figure to list and returns its index (can be used for <a href="api/RemoveFigure">RemoveFigure</a>)</p> <p>Pascal</p> <pre class="language-pascal">
+<code class="language-pascal"><span class="token keyword">function</span> AddFigure<span class="token punctuation">(</span><span class="token keyword">const</span> figure <span class="token punctuation">:</span> TMapFigure<span class="token punctuation">)</span> <span class="token punctuation">:</span> Cardinal<span class="token punctuation">;</span></code></pre> <h4 id="nb-python-doesnt-support-all-figures-methods">NB: Python doesn’t support all Figures methods</h4> <p>Example Pascal</p> <pre class="language-pascal">
+<code class="language-pascal"><span class="token keyword">PROGRAM</span> Test<span class="token punctuation">;</span>
+<span class="token keyword">var</span>
+  temp11 <span class="token punctuation">:</span> TMapFigure<span class="token punctuation">;</span>
+<span class="token keyword">begin</span>
+  temp11<span class="token punctuation">.</span>kind <span class="token operator">:=</span> fkRectangle<span class="token punctuation">;</span>       
+  temp11<span class="token punctuation">.</span>coord <span class="token operator">:=</span> fcScreen<span class="token punctuation">;</span>
+  temp11<span class="token punctuation">.</span>y1 <span class="token operator">:=</span> <span class="token number">55</span><span class="token punctuation">;</span>
+  temp11<span class="token punctuation">.</span>y2 <span class="token operator">:=</span> <span class="token number">99</span><span class="token punctuation">;</span>
+  temp11<span class="token punctuation">.</span>brushColor <span class="token operator">:=</span> <span class="token number">8888</span><span class="token punctuation">;</span>
+  temp11<span class="token punctuation">.</span>worldNum <span class="token operator">:=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+  temp11<span class="token punctuation">.</span>text <span class="token operator">:=</span> <span class="token string">'test'</span><span class="token punctuation">;</span>  
+  AddFigure<span class="token punctuation">(</span>temp11<span class="token punctuation">)</span><span class="token punctuation">;</span>    
+ <span class="token keyword">end</span><span class="token punctuation">.</span>
+</code></pre> <h4 id="types">Types:</h4> <pre class="language-pascal">
+<code class="language-pascal">TMapFigure <span class="token operator">=</span> <span class="token keyword">record</span>
+  kind <span class="token punctuation">:</span> TFigureKind<span class="token punctuation">;</span>
+  coord <span class="token punctuation">:</span> TFigureCoord<span class="token punctuation">;</span>
+  x1 <span class="token punctuation">:</span> Integer<span class="token punctuation">;</span>
+  y1 <span class="token punctuation">:</span> Integer<span class="token punctuation">;</span>
+  x2 <span class="token punctuation">:</span> Integer<span class="token punctuation">;</span>
+  y2 <span class="token punctuation">:</span> Integer<span class="token punctuation">;</span>
+  brushColor <span class="token punctuation">:</span> TColor<span class="token punctuation">;</span>
+  brushStyle <span class="token punctuation">:</span> TBrushStyle<span class="token punctuation">;</span>
+  color <span class="token punctuation">:</span> TColor<span class="token punctuation">;</span>
+  worldNum <span class="token punctuation">:</span> Byte<span class="token punctuation">;</span>
+  text <span class="token punctuation">:</span> <span class="token keyword">String</span><span class="token punctuation">;</span>
+<span class="token keyword">end</span><span class="token punctuation">;</span></code></pre> <p>where</p> <pre class="language-pascal">
+<code class="language-pascal">TFigureCoord <span class="token operator">=</span> <span class="token punctuation">(</span>fcWorld<span class="token punctuation">,</span> fcScreen<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+TFigureKind <span class="token operator">=</span> <span class="token punctuation">(</span>fkLine<span class="token punctuation">,</span> fkEllipse<span class="token punctuation">,</span> fkRectangle<span class="token punctuation">,</span> fkDirection<span class="token punctuation">,</span> fkText<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+TBrushStyle <span class="token operator">=</span> <span class="token punctuation">(</span>bsSolid<span class="token punctuation">,</span> bsClear<span class="token punctuation">,</span> bsHorizontal<span class="token punctuation">,</span> bsVertical<span class="token punctuation">,</span>  bsFDiagonal<span class="token punctuation">,</span> bsBDiagonal<span class="token punctuation">,</span> bsCross<span class="token punctuation">,</span> bsDiagCross<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>    </div>   <div id="__routify_iframes" style="display: none;"></div></div></body></html>
+<!--prerendered-->

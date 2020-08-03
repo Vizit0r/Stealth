@@ -1,0 +1,55 @@
+<!DOCTYPE html><html lang="en"><head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+
+	<title>Stealth Client - Installation</title>
+
+	<meta name="theme-color" content="#E938C2">
+	<link rel="apple-touch-icon" href="images/touch-icons/logo-192.png">
+
+	<link rel="manifest" href="/manifest.json">
+	<link rel="icon" type="image/png" href="/favicon.png">
+	
+	<link rel="stylesheet" href="/build/bundle.css">
+
+	<script type="module" defer="" src="/build/main.js"></script>
+<meta data-render="prerendered"><meta name="description" content="Ultimate Ultima Online scripting client" data-origin="routify"><meta property="og:description" content="Ultimate Ultima Online scripting client" data-origin="routify"><meta name="title" content="Stealth Client - Installation" data-origin="routify"><meta property="og:title" content="Stealth Client - Installation" data-origin="routify"></head>
+
+<body>
+	<noscript>Please enable Javascript for best experience.</noscript>
+
+
+<div id="routify-app"><div class="container svelte-1r0ewnc"><nav class="header svelte-28ka2x"><a href="/" class="svelte-28ka2x">home</a><a href="/api" class="svelte-28ka2x">api</a><a href="/manuals" class="svelte-28ka2x active">manuals</a><a href="/about" class="svelte-28ka2x">about</a></nav> <h1 id="installation-and-configuration">Installation and Configuration</h1> <p>Installation is simple: just <a href="http://stealth.od.ua/" rel="nofollow">download</a> latest Stealth version and unzip it somewhere.</p> <h1 id="configuration">Configuration</h1> <p>Configuration is a few step process, you need to create profiles for character, shard and client.</p> <p>You need to open profile editor and configure:</p> <ul><li>character profile - login &amp; password, shard profile and shard number and character number for autologin</li> 
+<li>shard profile - game server address/ip, port, client version, client profile</li> 
+<li>client profile - path to uo\client.exe to launch graphical client with the <strong>Start Client</strong> button</li></ul> <h2 id="open-profile-editor">Open profile editor</h2> <p>[<img src="/images/Open_profile_setup.png" alt="Open_profile_setup.png"></p> <h2 id="character-setup">Character setup</h2> <p><img src="/images/profiles.png" alt="Profile setup.jpg"></p> <ul><li><strong>Name</strong> - the name for the character profile in the Stealth</li> 
+<li><strong>Login</strong> - game account login</li> 
+<li><strong>Password</strong> - game account password</li> 
+<li><strong>Reconnect time</strong> - delay to automatically reconnect to the shard after the disconnection, in seconds (10 - means 10 seconds)</li> 
+<li><strong>Shard</strong> - a drop-down list of game servers (shards) and <strong>Shards Setup button</strong>.</li></ul> <p>When you connect to the game server it is usually a list of game servers, and then you select one of them, then you select from playable characters list:</p> <p>How select shard and character index - Setting the game server and character</p> <ul><li><strong>Ask for me</strong> - to ask</li> 
+<li><strong>Remember my choise</strong> - remember my choice</li> 
+<li><strong>Always select</strong> - select automatically shard and character defined bellow</li> 
+<li><strong>Shard</strong> - serial number of the server, where the first server in the list is 1</li> 
+<li><strong>Char</strong> - serial number of a game character, where the first character in the list is 1</li></ul> <p>☛ To add a new profile, press the green button in the lower left corner of the Profile Setup.</p> <p>☛ To delete, click the red minus sign in the lower left corner of the Profile Setup.</p> <p>☛ To save your changes, click Save.</p> <h2 id="shard-setup">Shard setup</h2> <p><img src="/images/Shard_setup.png" alt="Shard setup.jpg"></p> <ul><li><p><strong>Name</strong> - the name for a shard in the Stealth</p></li> 
+<li><p><strong>Address</strong> (in the old version - IP) - shard address or ip</p></li> 
+<li><p><strong>Port</strong> - shard port</p></li> 
+<li><p><strong>Use Proxy</strong> - proxy</p></li> 
+<li><p><strong>Proxy IP</strong> - address of the proxy</p></li> 
+<li><p><strong>Proxy Port</strong> - the port the proxy server</p></li> 
+<li><p><strong>No Auth / With Auth</strong> - does not require authorization / authentication is required</p></li> 
+<li><p><strong>Proxy Auth Login and Proxy Auth Password</strong> - the login and password for the proxy server</p></li> 
+<li><p><strong>Client version</strong> - specify the version of the client needed to play on the shard (eg 2.0.3 client will be: 2.0.3.0)</p></li> 
+<li><p><strong>Encrypted client</strong> - use encryption. Necessary for those servers where data encryption is enabled. Most free servers do not use encrypted client.</p></li> 
+<li><p><strong>UO files path</strong></p> 
+<p>- the directory with the game files (files like map0.mul, tiledata.mul, etc.)</p> 
+<ol><li>With proper choice of the directory will be displayed: <strong>Status: Path Correct</strong></li></ol></li></ul> <ol start="2"><li>If not properly selected directory will be displayed: <strong>Status: Path Incorrect</strong></li></ol> <ul><li><p><strong>Selected Client</strong> - the client’s choice for the shard and <strong>Clients setup button</strong></p></li> 
+<li><p><strong>Enable Razor support</strong> - Some servers accept only clients with attached Razor assistant. This checkbox will enable Razor emulaation in Stealth.</p></li> 
+<li><p><strong>Server type</strong> - In common should be “Default” , but some specific shards have items in this list for normal work.</p></li></ul> <p>☛ To add a shard, click Add</p> <p>☛ To remove a shard hit the Delete button</p> <p>☛ To save the settings, click Save</p> <h2 id="client-setup">Client setup</h2> <p><img src="http://stealth.od.ua/w/uploads/f/fa/Client_setup.jpg" alt="Client setup.jpg"></p> <ul><li><strong>Clients</strong> - a list of clients for shards</li> 
+<li><strong>Name</strong> - name of the client in the Stealth</li> 
+<li><strong>Path</strong> - the path to the client</li> 
+<li><strong>Version</strong> - game client version</li> 
+<li><strong>Encrypted client</strong> - If your client uses encryption, you need to put this check, if the encryption is removed, respectively, then it is not necessary, otherwise the client can “fall” or simply do not connect.</li> 
+<li><strong>Change resolution</strong> - resizing the game window (where the character is displayed and the world)(like Razor) allowed values: width(320-1280), height(240-1024)</li> 
+<li><strong>Remove stamina check</strong> - allows passing through other players or NPC</li> 
+<li><strong>Path to MultiClient</strong> - allows you to run multiple copies of the client</li> 
+<li><strong>Use steal.cfg instead login.cfg</strong> - save Stealth local server address to steal.cfg file instead of login.cfg</li></ul> <p>☛ To add a client - click the green cross in the upper right corner</p> <p>☛ To delete a client, click the red minus sign in the right corner</p> <p>☛ The arrows in the upper right corner of the move to client list of customers up and down respectively</p> <h2 id="you-are-done">You are done</h2> <p>Now you can select profile and click <strong>Connect</strong> button to login to the game.</p>    </div>   <div id="__routify_iframes" style="display: none;"></div></div></body></html>
+<!--prerendered-->

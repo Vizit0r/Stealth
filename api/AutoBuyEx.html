@@ -1,0 +1,31 @@
+<!DOCTYPE html><html lang="en"><head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+
+	<title>Stealth Client - AutoBuyEx</title>
+
+	<meta name="theme-color" content="#E938C2">
+	<link rel="apple-touch-icon" href="images/touch-icons/logo-192.png">
+
+	<link rel="manifest" href="/manifest.json">
+	<link rel="icon" type="image/png" href="/favicon.png">
+	
+	<link rel="stylesheet" href="/build/bundle.css">
+
+	<script type="module" defer="" src="/build/main.js"></script>
+<meta data-render="prerendered"><meta name="description" content="Ultimate Ultima Online scripting client" data-origin="routify"><meta property="og:description" content="Ultimate Ultima Online scripting client" data-origin="routify"><meta name="title" content="Stealth Client - AutoBuyEx" data-origin="routify"><meta property="og:title" content="Stealth Client - AutoBuyEx" data-origin="routify"></head>
+
+<body>
+	<noscript>Please enable Javascript for best experience.</noscript>
+
+
+<div id="routify-app"><div class="container svelte-1r0ewnc"><nav class="header svelte-28ka2x"><a href="/" class="svelte-28ka2x">home</a><a href="/api" class="svelte-28ka2x active">api</a><a href="/manuals" class="svelte-28ka2x">manuals</a><a href="/about" class="svelte-28ka2x">about</a></nav> <h1 id="title">AutoBuyEx</h1> <p>Applying for present buy lists, or set the hook for next incoming buy lists.</p> <ul><li>“ItemType” can be any number, or $FFFF (-1) = any type</li> 
+<li>“ItemColor” can be any number, or $FFFF (-1) = any color</li> 
+<li>“Quantity” can be any number, or $FFFF (-1) = amount taking from buy list. If “Quantity” less than amount in sell list, then using “Quantity”, else using amount from sell list.</li> 
+<li>“Price” can be any number, or $FFFF (-1) = any price</li> 
+<li>“Name” must be exact name (including case!), or empty string for any name</li></ul> <p>This hook works NOT once, but will work until removed.</p> <p>For hook removing need to set AutoBuy with “Quantity” param = 0.</p> <p>Pascal</p> <pre class="language-pascal">
+<code class="language-pascal"><span class="token keyword">procedure</span> AutoBuyEx<span class="token punctuation">(</span>ItemType <span class="token punctuation">:</span> Word<span class="token punctuation">;</span> ItemColor <span class="token punctuation">:</span> Word<span class="token punctuation">;</span> Quantity <span class="token punctuation">:</span> Word<span class="token punctuation">;</span> Price <span class="token punctuation">:</span> Cardinal<span class="token punctuation">;</span> <span class="token keyword">Name</span> <span class="token punctuation">:</span> <span class="token keyword">String</span><span class="token punctuation">)</span>
+</code></pre> <p>Python</p> <pre class="language-python">
+<code class="language-python">AutoBuyEx<span class="token punctuation">(</span>ItemType<span class="token punctuation">,</span> ItemColor<span class="token punctuation">,</span> Quantity<span class="token punctuation">,</span> Price<span class="token punctuation">,</span> ItemName<span class="token punctuation">)</span></code></pre> <p>Example 1:</p> <pre class="language-pascal">
+<code class="language-pascal">AutoBuyEx<span class="token punctuation">(</span>NS<span class="token punctuation">,</span><span class="token number">$FFFF</span><span class="token punctuation">,</span><span class="token number">400</span><span class="token punctuation">,</span><span class="token number">$FFFF</span><span class="token punctuation">,</span><span class="token string">''</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//will buy NS reagent of any color, all amount in buy list</span></code></pre>    </div>   <div id="__routify_iframes" style="display: none;"></div></div></body></html>
+<!--prerendered-->

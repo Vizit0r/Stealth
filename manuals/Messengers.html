@@ -1,0 +1,232 @@
+<!DOCTYPE html><html lang="en"><head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+
+	<title>Stealth Client - Messengers</title>
+
+	<meta name="theme-color" content="#E938C2">
+	<link rel="apple-touch-icon" href="images/touch-icons/logo-192.png">
+
+	<link rel="manifest" href="/manifest.json">
+	<link rel="icon" type="image/png" href="/favicon.png">
+	
+	<link rel="stylesheet" href="/build/bundle.css">
+
+	<script type="module" defer="" src="/build/main.js"></script>
+<meta data-render="prerendered"><meta name="description" content="Ultimate Ultima Online scripting client" data-origin="routify"><meta property="og:description" content="Ultimate Ultima Online scripting client" data-origin="routify"><meta name="title" content="Stealth Client - Messengers" data-origin="routify"><meta property="og:title" content="Stealth Client - Messengers" data-origin="routify"></head>
+
+<body>
+	<noscript>Please enable Javascript for best experience.</noscript>
+
+
+<div id="routify-app"><div class="container svelte-1r0ewnc"><nav class="header svelte-28ka2x"><a href="/" class="svelte-28ka2x">home</a><a href="/api" class="svelte-28ka2x">api</a><a href="/manuals" class="svelte-28ka2x active">manuals</a><a href="/about" class="svelte-28ka2x">about</a></nav> <h1 id="messengers">Messengers</h1> <p>Work with bots in Stealth realized with messengers bots technology.</p> <p>At then moment has been done realization of Telegram, Viber and Discord.</p> <p>” ‘Skype’ ” can’t be done due to to technical reson</p> <p>In the internal scripts (PS and PAX) there is a TMessenger class</p> <pre class="language-pascal">
+<code class="language-pascal">  TMessenger <span class="token operator">=</span> <span class="token keyword">class</span>
+  <span class="token keyword">public</span>
+    <span class="token keyword">procedure</span> SendMessage<span class="token punctuation">(</span>Msg<span class="token punctuation">,</span> UserID <span class="token punctuation">:</span> <span class="token keyword">String</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token keyword">virtual</span><span class="token punctuation">;</span>
+    <span class="token keyword">property</span> MessengerName<span class="token punctuation">:</span> <span class="token keyword">string</span> <span class="token keyword">read</span> GetMessengerName<span class="token punctuation">;</span>
+    <span class="token keyword">property</span> Connected <span class="token punctuation">:</span> Boolean <span class="token keyword">read</span> fConnected <span class="token keyword">write</span> SetConnected <span class="token keyword">default</span> <span class="token keyword">False</span><span class="token punctuation">;</span>
+    <span class="token keyword">property</span> Token <span class="token punctuation">:</span> <span class="token keyword">String</span> <span class="token keyword">read</span> GetToken <span class="token keyword">write</span> SetToken<span class="token punctuation">;</span>
+  <span class="token keyword">end</span><span class="token punctuation">;</span></code></pre> <p>and 3 variables:</p> <pre class="language-pascal">
+<code class="language-pascal">  ViberMessenger <span class="token punctuation">:</span> TMessenger<span class="token punctuation">;</span>
+  TelegramMessenger <span class="token punctuation">:</span> TMessenger<span class="token punctuation">;</span>
+  DiscordMessenger <span class="token punctuation">:</span> TMessenger<span class="token punctuation">;</span></code></pre> <p>Content of this classes you can inspect when debugging scripts in Editor window.</p> <p>Token must be set before connection (Bot Registration instruction - [[Doc:RU/Manual/Reference/Messengers/BotRegistration]] )</p> <p>Warning! For correct work of Viber Ngrok needed, if Ngrok not installеd - Stealth will offer you to download it and put to Stealth folder.</p> <h3 id="warning-in-external-scripts-first-parameter-in-evmessengerevent-is-not-a-tmessenger-object-but-messenger-code---1-is-telegram-2---viber-3---discord">WARNING! In external scripts first parameter in evMessengerEvent is not a TMessenger object, but messenger code - 1 is telegram, 2 - viber, 3 - Discord</h3> <p>Big example for messenger all-side using</p> <pre class="language-pascal">
+<code class="language-pascal"><span class="token keyword">Program</span> <span class="token keyword">New</span><span class="token punctuation">;</span>
+  
+<span class="token keyword">procedure</span> MessengerEventHandler<span class="token punctuation">(</span>Sender <span class="token punctuation">:</span> TMessenger<span class="token punctuation">;</span> SenderNickName <span class="token punctuation">:</span> <span class="token keyword">String</span><span class="token punctuation">;</span> SenderId<span class="token punctuation">,</span> ChatId <span class="token punctuation">:</span> <span class="token keyword">String</span><span class="token punctuation">;</span> EventMsg <span class="token punctuation">:</span> <span class="token keyword">String</span><span class="token punctuation">;</span> EventCode <span class="token punctuation">:</span> Byte<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">begin</span>
+  <span class="token keyword">case</span> EventCode <span class="token keyword">of</span>
+    <span class="token number">0</span> <span class="token punctuation">:</span> AddToSystemJournal<span class="token punctuation">(</span>Sender<span class="token punctuation">.</span>MessengerName <span class="token operator">+</span> <span class="token string">' Connected'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token number">1</span> <span class="token punctuation">:</span> AddToSystemJournal<span class="token punctuation">(</span>Sender<span class="token punctuation">.</span>MessengerName <span class="token operator">+</span> <span class="token string">' Disconnected'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token number">2</span> <span class="token punctuation">:</span> <span class="token keyword">begin</span>
+          AddToSystemJournal<span class="token punctuation">(</span>Sender<span class="token punctuation">.</span>MessengerName <span class="token operator">+</span> <span class="token string">' Message incoming from "'</span> <span class="token operator">+</span> SenderNickName <span class="token operator">+</span> <span class="token string">'" (SenderId: '</span> <span class="token operator">+</span> SenderId <span class="token operator">+</span> <span class="token string">'), ChatID:  '</span> <span class="token operator">+</span> SenderId <span class="token operator">+</span> <span class="token string">' :'</span> <span class="token operator">+</span> EventMsg<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">end</span><span class="token punctuation">;</span>
+    <span class="token number">3</span> <span class="token punctuation">:</span> AddToSystemJournal<span class="token punctuation">(</span>Sender<span class="token punctuation">.</span>MessengerName <span class="token operator">+</span> <span class="token string">' Error raised : '</span> <span class="token operator">+</span> EventMsg<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">end</span><span class="token punctuation">;</span>
+<span class="token keyword">end</span><span class="token punctuation">;</span>
+
+<span class="token keyword">Begin</span>
+  SetEventProc<span class="token punctuation">(</span>evMessengerEvent<span class="token punctuation">,</span><span class="token string">'MessengerEventHandler'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                                                        
+ <span class="token keyword">if</span> <span class="token operator">not</span> ViberMessenger<span class="token punctuation">.</span>Connected <span class="token keyword">then</span>
+  <span class="token keyword">begin</span>
+    ViberMessenger<span class="token punctuation">.</span>Token <span class="token operator">:=</span> <span class="token string">'your_token_here'</span><span class="token punctuation">;</span>
+    ViberMessenger<span class="token punctuation">.</span>Connected <span class="token operator">:=</span> <span class="token keyword">True</span><span class="token punctuation">;</span>
+  <span class="token keyword">end</span><span class="token punctuation">;</span>
+
+  ViberMessenger<span class="token punctuation">.</span>SendMessage<span class="token punctuation">(</span><span class="token string">'hello from Stealth ViberBot!'</span><span class="token punctuation">,</span><span class="token string">'receiver_id_here'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            
+     
+  <span class="token keyword">if</span> <span class="token operator">not</span> TelegramMessenger<span class="token punctuation">.</span>Connected <span class="token keyword">then</span>
+  <span class="token keyword">begin</span>
+    TelegramMessenger<span class="token punctuation">.</span>Token <span class="token operator">:=</span> <span class="token string">'your_token_here'</span><span class="token punctuation">;</span>
+    TelegramMessenger<span class="token punctuation">.</span>Connected <span class="token operator">:=</span> <span class="token keyword">True</span><span class="token punctuation">;</span>
+  <span class="token keyword">end</span><span class="token punctuation">;</span>
+
+  TelegramMessenger<span class="token punctuation">.</span>SendMessage<span class="token punctuation">(</span><span class="token string">'hello from Stealth TelegramBot!'</span><span class="token punctuation">,</span><span class="token string">'receiver_id_here'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            
+
+  <span class="token keyword">if</span> <span class="token operator">not</span> DiscordMessenger<span class="token punctuation">.</span>Connected <span class="token keyword">then</span>
+  <span class="token keyword">begin</span>
+    DiscordMessenger<span class="token punctuation">.</span>Token <span class="token operator">:=</span> <span class="token string">'your_token_here'</span><span class="token punctuation">;</span>
+    DiscordMessenger<span class="token punctuation">.</span>Connected <span class="token operator">:=</span> <span class="token keyword">True</span><span class="token punctuation">;</span>
+  <span class="token keyword">end</span><span class="token punctuation">;</span>
+
+  DiscordMessenger<span class="token punctuation">.</span>SendMessage<span class="token punctuation">(</span><span class="token string">'hello from Stealth DiscordBot!'</span><span class="token punctuation">,</span><span class="token string">'channel_id_here'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token keyword">While</span> <span class="token keyword">True</span> <span class="token keyword">do</span>
+  <span class="token keyword">begin</span>
+    wait<span class="token punctuation">(</span><span class="token number">200</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">end</span><span class="token punctuation">;</span>
+       
+<span class="token keyword">end</span><span class="token punctuation">.</span></code></pre> <p>Example 2, external script on Delphi</p> <pre class="language-pascal">
+<code class="language-pascal"><span class="token keyword">program</span> Project2<span class="token punctuation">;</span>
+
+<span class="token comment">{$R *.res}</span>
+
+<span class="token keyword">uses</span>
+  System<span class="token punctuation">.</span>SysUtils<span class="token punctuation">,</span>
+  windows<span class="token punctuation">,</span>
+  stealth_script <span class="token operator">in</span> <span class="token string">'....stealth_script.pas'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">procedure</span> MessengerEventHandler<span class="token punctuation">(</span>MesID <span class="token punctuation">:</span> Cardinal<span class="token punctuation">;</span> SenderNickName <span class="token punctuation">:</span> <span class="token keyword">String</span><span class="token punctuation">;</span>
+SenderId<span class="token punctuation">,</span> ChatId <span class="token punctuation">:</span> <span class="token keyword">String</span><span class="token punctuation">;</span> EventMsg <span class="token punctuation">:</span> <span class="token keyword">String</span><span class="token punctuation">;</span> EventCode <span class="token punctuation">:</span> Byte<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token keyword">stdcall</span><span class="token punctuation">;</span>
+<span class="token keyword">begin</span>
+  <span class="token keyword">with</span> Script <span class="token keyword">do</span>
+  <span class="token keyword">case</span> MesID <span class="token keyword">of</span>
+    <span class="token number">0</span><span class="token punctuation">,</span><span class="token number">1</span> <span class="token punctuation">:</span>
+    <span class="token keyword">case</span> EventCode <span class="token keyword">of</span>
+      <span class="token number">0</span> <span class="token punctuation">:</span> AddToSystemJournal<span class="token punctuation">(</span><span class="token string">'Telegram'</span> <span class="token operator">+</span> <span class="token string">' Connected'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token number">1</span> <span class="token punctuation">:</span> AddToSystemJournal<span class="token punctuation">(</span><span class="token string">'Telegram'</span> <span class="token operator">+</span> <span class="token string">' Disconnected'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token number">2</span> <span class="token punctuation">:</span> <span class="token keyword">begin</span>
+            AddToSystemJournal<span class="token punctuation">(</span><span class="token string">'Telegram'</span> <span class="token operator">+</span> <span class="token string">' Message incoming from "'</span> <span class="token operator">+</span> SenderNickName <span class="token operator">+</span> <span class="token string">'" (SenderId: '</span> <span class="token operator">+</span> SenderId <span class="token operator">+</span> <span class="token string">') : '</span> <span class="token operator">+</span> EventMsg<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            TelegramMessenger<span class="token punctuation">.</span>SendMessage<span class="token punctuation">(</span><span class="token string">'response from Stealth : '</span> <span class="token operator">+</span> EventMsg<span class="token punctuation">,</span>SenderId<span class="token punctuation">)</span>
+          <span class="token keyword">end</span><span class="token punctuation">;</span>
+      <span class="token number">3</span> <span class="token punctuation">:</span> AddToSystemJournal<span class="token punctuation">(</span><span class="token string">'Telegram'</span> <span class="token operator">+</span> <span class="token string">' Error raised : '</span> <span class="token operator">+</span> EventMsg<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">end</span><span class="token punctuation">;</span>
+
+    <span class="token number">2</span><span class="token punctuation">:</span>
+    <span class="token keyword">case</span> EventCode <span class="token keyword">of</span>
+      <span class="token number">0</span> <span class="token punctuation">:</span> AddToSystemJournal<span class="token punctuation">(</span><span class="token string">'Viber'</span> <span class="token operator">+</span> <span class="token string">' Connected'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token number">1</span> <span class="token punctuation">:</span> AddToSystemJournal<span class="token punctuation">(</span><span class="token string">'Viber'</span> <span class="token operator">+</span> <span class="token string">' Disconnected'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token number">2</span> <span class="token punctuation">:</span> <span class="token keyword">begin</span>
+            AddToSystemJournal<span class="token punctuation">(</span><span class="token string">'Viber'</span> <span class="token operator">+</span> <span class="token string">' Message incoming from "'</span> <span class="token operator">+</span> SenderNickName <span class="token operator">+</span> <span class="token string">'" (SenderId: '</span> <span class="token operator">+</span> SenderId <span class="token operator">+</span> <span class="token string">') : '</span> <span class="token operator">+</span> EventMsg<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            ViberMessenger<span class="token punctuation">.</span>SendMessage<span class="token punctuation">(</span><span class="token string">'response from Stealth : '</span> <span class="token operator">+</span> EventMsg<span class="token punctuation">,</span>SenderId<span class="token punctuation">)</span>
+          <span class="token keyword">end</span><span class="token punctuation">;</span>
+      <span class="token number">3</span> <span class="token punctuation">:</span> AddToSystemJournal<span class="token punctuation">(</span><span class="token string">'Viber'</span> <span class="token operator">+</span> <span class="token string">' Error raised : '</span> <span class="token operator">+</span> EventMsg<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">end</span><span class="token punctuation">;</span>
+    <span class="token number">3</span><span class="token punctuation">:</span>
+    <span class="token keyword">case</span> EventCode <span class="token keyword">of</span>
+      <span class="token number">0</span> <span class="token punctuation">:</span> AddToSystemJournal<span class="token punctuation">(</span><span class="token string">'Discord'</span> <span class="token operator">+</span> <span class="token string">' Connected'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token number">1</span> <span class="token punctuation">:</span> AddToSystemJournal<span class="token punctuation">(</span><span class="token string">'Discord'</span> <span class="token operator">+</span> <span class="token string">' Disconnected'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token number">2</span> <span class="token punctuation">:</span> <span class="token keyword">begin</span>
+            AddToSystemJournal<span class="token punctuation">(</span><span class="token string">'Discord'</span> <span class="token operator">+</span> <span class="token string">' Message incoming from "'</span> <span class="token operator">+</span> SenderNickName
+                               <span class="token operator">+</span> <span class="token string">'" (SenderId: '</span> <span class="token operator">+</span> SenderId <span class="token operator">+</span> <span class="token string">') on ChannelId '</span>
+                               <span class="token operator">+</span> ChatId <span class="token operator">+</span> <span class="token string">' : '</span> <span class="token operator">+</span> EventMsg<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">//            DiscordMessenger.SendMessage('response from Stealth : ' + EventMsg,ChatId)</span>
+          <span class="token keyword">end</span><span class="token punctuation">;</span>
+      <span class="token number">3</span> <span class="token punctuation">:</span> AddToSystemJournal<span class="token punctuation">(</span><span class="token string">'Discord'</span> <span class="token operator">+</span> <span class="token string">' Error raised : '</span> <span class="token operator">+</span> EventMsg<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">end</span><span class="token punctuation">;</span>
+  <span class="token keyword">end</span><span class="token punctuation">;</span>
+<span class="token keyword">end</span><span class="token punctuation">;</span>
+
+<span class="token keyword">Begin</span>
+  Script<span class="token punctuation">.</span>SetEventProc<span class="token punctuation">(</span>evMessengerEvent<span class="token punctuation">,</span> <span class="token operator">@</span>MessengerEventHandler<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  Script<span class="token punctuation">.</span>ViberMessenger<span class="token punctuation">.</span>Connected <span class="token operator">:=</span> <span class="token keyword">False</span><span class="token punctuation">;</span>
+
+ <span class="token keyword">if</span> <span class="token operator">not</span> Script<span class="token punctuation">.</span>ViberMessenger<span class="token punctuation">.</span>Connected <span class="token keyword">then</span>
+  <span class="token keyword">begin</span>
+    Script<span class="token punctuation">.</span>ViberMessenger<span class="token punctuation">.</span>Token <span class="token operator">:=</span> <span class="token string">'your_token_here'</span><span class="token punctuation">;</span>
+    Script<span class="token punctuation">.</span>ViberMessenger<span class="token punctuation">.</span>Connected <span class="token operator">:=</span> <span class="token keyword">True</span><span class="token punctuation">;</span>
+  <span class="token keyword">end</span><span class="token punctuation">;</span>
+
+  Script<span class="token punctuation">.</span>ViberMessenger<span class="token punctuation">.</span>SendMessage<span class="token punctuation">(</span><span class="token string">'hello from Stealth ViberBot!'</span><span class="token punctuation">,</span><span class="token string">'receiver_id_here'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+
+  <span class="token keyword">if</span> <span class="token operator">not</span> Script<span class="token punctuation">.</span>TelegramMessenger<span class="token punctuation">.</span>Connected <span class="token keyword">then</span>
+  <span class="token keyword">begin</span>
+    Script<span class="token punctuation">.</span>TelegramMessenger<span class="token punctuation">.</span>Token <span class="token operator">:=</span> <span class="token string">'your_token_here'</span><span class="token punctuation">;</span>
+    Script<span class="token punctuation">.</span>TelegramMessenger<span class="token punctuation">.</span>Connected <span class="token operator">:=</span> <span class="token keyword">True</span><span class="token punctuation">;</span>
+  <span class="token keyword">end</span><span class="token punctuation">;</span>
+
+  Script<span class="token punctuation">.</span>TelegramMessenger<span class="token punctuation">.</span>SendMessage<span class="token punctuation">(</span><span class="token string">'hello from Stealth TelegramBot!'</span><span class="token punctuation">,</span><span class="token string">'receiver_id_here'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  Script<span class="token punctuation">.</span>SetEventProc<span class="token punctuation">(</span>evMessengerEvent<span class="token punctuation">,</span> <span class="token operator">@</span>MessengerEventHandler<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  Script<span class="token punctuation">.</span>DiscordMessenger<span class="token punctuation">.</span>Connected <span class="token operator">:=</span> <span class="token keyword">False</span><span class="token punctuation">;</span>
+
+  <span class="token keyword">if</span> <span class="token operator">not</span> Script<span class="token punctuation">.</span>DiscordMessenger<span class="token punctuation">.</span>Connected <span class="token keyword">then</span>
+  <span class="token keyword">begin</span>
+    Script<span class="token punctuation">.</span>DiscordMessenger<span class="token punctuation">.</span>Token <span class="token operator">:=</span> <span class="token string">'your_token_here'</span><span class="token punctuation">;</span>
+    Script<span class="token punctuation">.</span>DiscordMessenger<span class="token punctuation">.</span>Connected <span class="token operator">:=</span> <span class="token keyword">True</span><span class="token punctuation">;</span>
+  <span class="token keyword">end</span><span class="token punctuation">;</span>
+  Script<span class="token punctuation">.</span>DiscordMessenger<span class="token punctuation">.</span>SendMessage<span class="token punctuation">(</span><span class="token string">'hello from Stealth DiscordBot!'</span><span class="token punctuation">,</span><span class="token string">'channel_id_here'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token keyword">While</span> <span class="token keyword">True</span> <span class="token keyword">do</span>
+    Script<span class="token punctuation">.</span>wait<span class="token punctuation">(</span><span class="token number">200</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">end</span><span class="token punctuation">.</span>
+</code></pre> <p>ID of user-sender can be easy taken - just send any message from this user to our bot, connected by Stealth with script from examples. In Sysjournal will come message like
+17:27:37:759 [Test - Test]: Telegram Message incoming from “Vizit0r” (SenderId: 435486649) : testtest<br>
+where 435486649 is sender ID. (id - fake, given for example).</p> <p>For Discord you should use not userID, but channel ID. Can be taken from receiving message as well.</p> <p>Example 3, external script on Python:</p> <pre class="language-python">
+<code class="language-python">
+MSG <span class="token operator">=</span> <span class="token string">'Event test'</span>
+ID <span class="token operator">=</span> <span class="token number">0</span>  <span class="token comment"># 1-Telegram, 2-Viber, 3-Discord, 0-default</span>
+TOKEN <span class="token operator">=</span> <span class="token string">'your_token_here'</span>
+USER_ID <span class="token operator">=</span> <span class="token string">'id'</span>
+
+
+<span class="token keyword">def</span> <span class="token function">callback</span><span class="token punctuation">(</span><span class="token operator">*</span>args<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    AddToSystemJournal<span class="token punctuation">(</span><span class="token string">'Callback args: '</span><span class="token punctuation">,</span> args<span class="token punctuation">)</span>
+
+
+<span class="token keyword">def</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    AddToSystemJournal<span class="token punctuation">(</span><span class="token string">'Messenger test started'</span><span class="token punctuation">)</span>
+    SetEventProc<span class="token punctuation">(</span><span class="token string">'evMessengerEvent'</span><span class="token punctuation">,</span> callback<span class="token punctuation">)</span>
+    
+    MessengerSetToken<span class="token punctuation">(</span>ID<span class="token punctuation">,</span> TOKEN<span class="token punctuation">)</span>
+    AddToSystemJournal<span class="token punctuation">(</span><span class="token string">'Token set'</span><span class="token punctuation">,</span> MessengerGetToken<span class="token punctuation">(</span>ID<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    
+    AddToSystemJournal<span class="token punctuation">(</span><span class="token string">'Connecting...'</span><span class="token punctuation">)</span>
+    MessengerSetConnected<span class="token punctuation">(</span>ID<span class="token punctuation">,</span> <span class="token boolean">True</span><span class="token punctuation">)</span>
+    <span class="token keyword">while</span> <span class="token keyword">not</span> MessengerGetConnected<span class="token punctuation">(</span>ID<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        Wait<span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">)</span>
+    <span class="token keyword">else</span><span class="token punctuation">:</span>
+        AddToSystemJournal<span class="token punctuation">(</span><span class="token string">'Connected state: '</span><span class="token punctuation">,</span> MessengerGetConnected<span class="token punctuation">(</span>ID<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+    AddToSystemJournal<span class="token punctuation">(</span><span class="token string">'Name is: '</span><span class="token punctuation">,</span> MessengerGetName<span class="token punctuation">(</span>ID<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+    AddToSystemJournal<span class="token punctuation">(</span><span class="token string">'Sending message to {0}'</span><span class="token punctuation">.</span><span class="token builtin">format</span><span class="token punctuation">(</span>USER_ID<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    MessengerSendMessage<span class="token punctuation">(</span>ID<span class="token punctuation">,</span> MSG<span class="token punctuation">,</span> USER_ID<span class="token punctuation">)</span>
+    
+    AddToSystemJournal<span class="token punctuation">(</span><span class="token string">'Disconnecting...'</span><span class="token punctuation">)</span>
+    MessengerSetConnected<span class="token punctuation">(</span>ID<span class="token punctuation">,</span> <span class="token boolean">False</span><span class="token punctuation">)</span>
+    
+    AddToSystemJournal<span class="token punctuation">(</span><span class="token string">'Done.'</span><span class="token punctuation">)</span>
+
+
+<span class="token keyword">if</span> __name__ <span class="token operator">==</span> <span class="token string">'__main__'</span><span class="token punctuation">:</span>
+    main<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre> <p>Example 4, external script on C#</p> <pre class="language-c#">
+<code class="language-c#">Stealth _s = Stealth.Default;
+
+_s.Viber.Connected += (o, e) =&gt; { _s.Journal.AddToSystemJournal("Viber connected"); };
+_s.Viber.Disconnected += (o, e) =&gt; { _s.Journal.AddToSystemJournal("Viber disconnected"); };
+
+_s.Viber.IncomingMessage += (o, e) =&gt;
+{
+    _s.Journal.AddToSystemJournal($"Viber incoming from '{e.SenderNickname}' (SenderId: { e.SenderId}): {e.Message}");
+    _s.Viber.SendMessage($"Viber response from Stealth: {e.Message}", e.SenderId);
+};
+
+_s.Viber.Error += (o, e) =&gt; { _s.Journal.AddToSystemJournal($"Viber error: {e.Message}"); };
+
+_s.Telegram.Connected += (o, e) =&gt; { _s.Journal.AddToSystemJournal("Telegram connected"); };
+_s.Telegram.Disconnected += (o, e) =&gt; { _s.Journal.AddToSystemJournal("Telegram disconnected"); };
+_s.Telegram.IncomingMessage += (o, e) =&gt;
+{
+    _s.Journal.AddToSystemJournal($"Telegram incoming from '{e.SenderNickname}' (SenderId: { e.SenderId}): {e.Message}");
+    _s.Telegram.SendMessage($"Telegram response from Stealth: {e.Message}", e.SenderId);
+};
+_s.Telegram.Error += (o, e) =&gt; { _s.Journal.AddToSystemJournal($"Telegram error: {e.Message}"); };
+
+_s.Viber.Connect(VIBER_TOKEN);
+_s.Telegram.Connect(TELEGRAM_TOKEN);</code></pre>    </div>   <div id="__routify_iframes" style="display: none;"></div></div></body></html>
+<!--prerendered-->

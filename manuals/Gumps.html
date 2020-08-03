@@ -1,0 +1,99 @@
+<!DOCTYPE html><html lang="en"><head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+
+	<title>Stealth Client - Gumps</title>
+
+	<meta name="theme-color" content="#E938C2">
+	<link rel="apple-touch-icon" href="images/touch-icons/logo-192.png">
+
+	<link rel="manifest" href="/manifest.json">
+	<link rel="icon" type="image/png" href="/favicon.png">
+	
+	<link rel="stylesheet" href="/build/bundle.css">
+
+	<script type="module" defer="" src="/build/main.js"></script>
+<meta data-render="prerendered"><meta name="description" content="Ultimate Ultima Online scripting client" data-origin="routify"><meta property="og:description" content="Ultimate Ultima Online scripting client" data-origin="routify"><meta name="title" content="Stealth Client - Gumps" data-origin="routify"><meta property="og:title" content="Stealth Client - Gumps" data-origin="routify"></head>
+
+<body>
+	<noscript>Please enable Javascript for best experience.</noscript>
+
+
+<div id="routify-app"><div class="container svelte-1r0ewnc"><nav class="header svelte-28ka2x"><a href="/" class="svelte-28ka2x">home</a><a href="/api" class="svelte-28ka2x">api</a><a href="/manuals" class="svelte-28ka2x active">manuals</a><a href="/about" class="svelte-28ka2x">about</a></nav> <h1 id="gumps">Gumps</h1> <h3 id="what-gumps-are">What gumps are.</h3> <p>Gump - thats an ingame window with custom contents, which forming from couple of gump elements.</p> <p>It can be simple - like gump with some text and buttons “Yes” and “No” - and very complex - with pages, hundreds of elements etc.</p> <h3 id="extra-info-and-tips">Extra info and tips</h3> <ol><li>Events called, when <code>Wait</code> method called, so its not a real parallel execution. BTW, thats the reason of using Wait instead of Sleep in Python</li> 
+<li>when events raised, its added to events queue, and executed in script one by one. Thats why you should NEVER put in event handler heavy things like moving, waiting for something, etc. Only light&amp;fast code!</li> 
+<li>Event available for all internal and external scripts, working same everywhere.</li></ol> <h3 id="list-of-available-events">List of available events:</h3> <ul><li><p>evItemInfo : [ID : Cardinal] - Incoming Item (not mobile!)</p></li> 
+<li><p>evItemDeleted : [ID : Cardinal] - Item deleted</p></li> 
+<li><p>evSpeech : [Text : String, SenderName : String, SenderID: Cardinal] - common incoming message</p></li> 
+<li><p>evMoveRejection : [Xorig, Yorig, Dir, XDest, YDest : Word] - server rejected the movement, not allowed to step</p></li> 
+<li><p>evDrawContainer : [ID, ModelGump : Cardinal] - drawing container (0x24 bag)</p></li> 
+<li><p>evAddItemToContainer : [ObjID, ContainerID : Cardinal]</p></li> 
+<li><p>evAddMultipleItemsInCont : [ContainerID : Cardinal] - Couple of items added to container, packet 0x3c</p></li> 
+<li><p>evRejectMoveItem : [Reason : Byte] - drag \ drop rejection</p></li> 
+<li><p>evDrawObject : [ID : Cardinal] - drawing any mobile (chars&amp;npc)</p></li> 
+<li><p>evMenu : [DialogID : Cardinal, MenuID : Word] - a Menu popped out</p></li> 
+<li><p>evMapMessage : [ID : Cardinal, centerx : Word, centery : Word] - Treasure discovered</p></li> 
+<li><p>evAllow_RefuseAttack : [ID : Cardinal, Attack_OK : Boolean] (ID = 0 if Attack_OK = False)</p></li> 
+<li><p>evClilocSpeech : [SenderID : String, SenderName : String, ClilocID : Cardinal, Text : String]</p></li> 
+<li><p>evBuff_DebuffSystem : [ID : Cardinal, Attribute_ID : Word, IsEnabled : Boolean] - A (de)buff  is (de)activated</p></li> 
+<li><p>evClientSendResync : [] - Stealth (or the client through it) sent resync</p></li> 
+<li><p>evIncomingGump : [Serial : Cardinal,GumpID : Cardinal,X: Integer,Y: Integer] - incoming gump</p></li> 
+<li><p>evTimer1 : [] - no settings, called every 100ms</p></li> 
+<li><p>evTimer2 : [] - no settings, called every 100ms</p></li> 
+<li><p>evWindowsMessage : [Param : Dword] : Received window message (Windows only!)</p></li> 
+<li><p>evSound : [Sound_ID : Cardinal, X , Y, Z : Word] - sound and its coordinates</p></li> 
+<li><p>evDeath : [Dead : Boolean] - If True Dead, else alive</p></li> 
+<li><p>evQuestArrow : [fQuestArrowX, fQuestArrowY : Word, fQuestArrowActive : Boolean]</p></li> 
+<li><p>evPartyInvite : [Inviter_ID : Cardinal] - some one is inviting us in party</p></li> 
+<li><p>evMapPin: [ID :Dword; Action, PinID : : Byte; X, Y : Word ] - Marked point on map.</p></li> 
+<li><p>evGumpTextEntry: [fGumpTextEntryID : Dword; Title - String; InputStyle : Byte; MaxValue : Dword; Title2 : String] - Strin Entry, look like gump, but really not.</p></li> 
+<li><p>evGraphicalEffect: [_srcID: Cardinal; _srcX, _srcY: Word; _srcZ : SmallInt; _dstID : Cardinal; _dstX, _dstY: Word; _dstZ : Smallint; _type : Byte; _itemID: Word; _fixedDir: Byte] -Graphical Effect.</p></li> 
+<li><p>evIRCIncomingText: [Message : String] - IRC incoming message</p></li> 
+<li><p>evMessengerEvent: [Sender : TMessenger; SenderNickName : String; SenderId, ChatId : String; EventMsg : String; EventCode : Byte] - more info in Messengers manual.</p></li> 
+<li><p>evSetGlobalVar: [VarName: String; VarValue: String] - The event is triggered when global variable is set from SetGlobal(‘stealth’,VarName,VarValue) or from external script.</p></li> 
+<li><p>evUpdateObjStats: [ID,CurLife,MaxLife,CurMana,ObjectInfo._MaxMana,CurStam,MaxStam : Integer] - fired when any of stats changed. Usually thats stats of our char.</p></li> 
+<li><p>evGlobalChat: [MsgNum: Word, Name, Text : String] - incoming global chat action.</p> 
+<p><strong>Deprecated events:</strong></p></li> 
+<li><p>evUnicodeSpeech: deprecated, used no longer (use evSpeech).</p></li> 
+<li><p>evClilocSpeechAffix: deprecated, used no longerя (use evClilocSpeech).</p></li> 
+<li><p>evDrawGamePlayer: deprecated, used no longer (use  evDrawObject).</p></li> 
+<li><p>evUpdateChar: deprecated, used no longer (use evDrawObject).</p></li> 
+<li><p>evCharAnimation : [ID : Cardinal, Action : Word]</p></li> 
+<li><p>evICQDisconnect : [] - deprecated, Windows only!)</p></li> 
+<li><p>evICQConnect : [] - deprecated, Windows only!)</p></li> 
+<li><p>evICQIncomingText : [uin, Text] - deprecated, Windows only!)</p></li> 
+<li><p>evICQError : [Text : String] - - deprecated, Windows only!)</p></li></ul> <h3 id="samples">Samples</h3> <pre class="language-pascal">
+<code class="language-pascal"><span class="token comment">//Pascal Sample</span>
+<span class="token keyword">Program</span> Test<span class="token punctuation">;</span> 
+
+<span class="token keyword">procedure</span> Speech<span class="token punctuation">(</span>text<span class="token punctuation">,</span>SenderName <span class="token punctuation">:</span> <span class="token keyword">String</span><span class="token punctuation">;</span> SenderID <span class="token punctuation">:</span> Cardinal<span class="token punctuation">)</span><span class="token punctuation">;</span> 
+<span class="token keyword">begin</span> 
+  AddToSystemJournal<span class="token punctuation">(</span><span class="token string">'Event! Unicode Speech: SenderID = $'</span><span class="token operator">+</span> IntToHex<span class="token punctuation">(</span>SenderID<span class="token punctuation">,</span><span class="token number">8</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">' ; SenderName =  '</span> <span class="token operator">+</span> SenderName <span class="token operator">+</span> <span class="token string">'; SenderText : '</span> <span class="token operator">+</span> text<span class="token punctuation">)</span><span class="token punctuation">;</span> 
+<span class="token keyword">end</span><span class="token punctuation">;</span> 
+
+<span class="token keyword">procedure</span> Char_Animation<span class="token punctuation">(</span>ID <span class="token punctuation">:</span> Cardinal<span class="token punctuation">;</span> Action <span class="token punctuation">:</span> Word<span class="token punctuation">)</span><span class="token punctuation">;</span> 
+<span class="token keyword">begin</span> 
+  AddToSystemJournal<span class="token punctuation">(</span><span class="token string">'Event! Char Animation: ID = $'</span><span class="token operator">+</span> IntToHex<span class="token punctuation">(</span>ID<span class="token punctuation">,</span><span class="token number">8</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">' ; Action =  '</span> <span class="token operator">+</span> IntToStr<span class="token punctuation">(</span>Action<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+<span class="token keyword">end</span><span class="token punctuation">;</span> 
+
+<span class="token keyword">procedure</span> multiple_Items<span class="token punctuation">(</span>ContainerID <span class="token punctuation">:</span> Cardinal<span class="token punctuation">)</span><span class="token punctuation">;</span> 
+<span class="token keyword">begin</span> 
+  AddToSystemJournal<span class="token punctuation">(</span><span class="token string">'Event! Add multiple Items In Cont: ContID = $'</span><span class="token operator">+</span> IntToHex<span class="token punctuation">(</span>ContainerID<span class="token punctuation">,</span><span class="token number">8</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+<span class="token keyword">end</span><span class="token punctuation">;</span> 
+
+<span class="token keyword">begin</span> 
+  SetEventProc<span class="token punctuation">(</span>evSpeech<span class="token punctuation">,</span><span class="token string">'Speech'</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+  SetEventProc<span class="token punctuation">(</span>evCharAnimation<span class="token punctuation">,</span><span class="token string">'Char_Animation'</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+  SetEventProc<span class="token punctuation">(</span>evAddMultipleItemsInCont<span class="token punctuation">,</span><span class="token string">'multiple_Items'</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+
+  <span class="token keyword">while</span> <span class="token keyword">True</span> <span class="token keyword">do</span> 
+	wait<span class="token punctuation">(</span><span class="token number">50</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+<span class="token keyword">end</span><span class="token punctuation">.</span></code></pre> <pre class="language-python">
+<code class="language-python"><span class="token comment">#Python sample</span>
+<span class="token keyword">def</span> <span class="token function">drawCallback</span><span class="token punctuation">(</span>objectID<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>objectID<span class="token punctuation">)</span>
+    
+SetEventProc<span class="token punctuation">(</span><span class="token string">'evDrawObject'</span><span class="token punctuation">,</span> Callback<span class="token operator">=</span>drawCallback<span class="token punctuation">)</span>
+
+<span class="token keyword">while</span> <span class="token boolean">True</span><span class="token punctuation">:</span>
+    Wait<span class="token punctuation">(</span><span class="token number">50</span><span class="token punctuation">)</span></code></pre>    </div>   <div id="__routify_iframes" style="display: none;"></div></div></body></html>
+<!--prerendered-->
