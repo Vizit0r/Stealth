@@ -1,4 +1,4 @@
 User-agent: *
 Disallow: /tags/*
 
-Sitemap: https://Stealth.github.io/sitemap.xml
+Sitemap: https://vizit0r.github.io/Stealth/sitemap.xml
